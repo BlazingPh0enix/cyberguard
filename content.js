@@ -21,7 +21,9 @@
             });
           
             const data = await response.json();
-            if (data.prediction === 1) {
+            // Check prediction probability (second element in the data array)
+            // If probability > 0.5, consider it as cyberbullying
+            if (data.data && data.data[1] > 0.5) {
               // Replace harmful content with asterisks
               element.textContent = "*".repeat(originalText.length);
             }

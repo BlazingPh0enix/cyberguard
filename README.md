@@ -16,6 +16,8 @@ CyberGuard is designed to identify and prevent cyberbullying through advanced te
 
 ## Getting Started
 
+### Training the Model
+
 ### Prerequisites
 
 - Python 3.6 or higher
