@@ -1,7 +1,7 @@
 (() => {
   const replaceTextWithResponse = async () => {
     // Target Reddit comment content elements
-    const elements = document.querySelectorAll('.md[id$="-comment-rtjson-content"], .md[id$="-post-rtjson-content"]');
+    const elements = document.querySelectorAll('.md[id$="-comment-rtjson-content"] [id$="-post-rtjson-content"] p');
     
     for (let element of elements) {
       const originalText = element.textContent.trim();
@@ -32,22 +32,22 @@
   };
 
   // Set up a MutationObserver to watch for dynamically added comments
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.addedNodes.length > 0) {
-        // Check if any of the added nodes contain comments
-        const hasComments = Array.from(mutation.addedNodes).some(node => 
-          node.querySelector && node.querySelector('.md[id$="-comment-rtjson-content"]')
-        );
-        if (hasComments) {
-          replaceTextWithResponse();
-        }
-      }
-    }
-  });
+  // const observer = new MutationObserver((mutations) => {
+  //   for (const mutation of mutations) {
+  //     if (mutation.addedNodes.length > 0) {
+  //       // Check if any of the added nodes contain comments
+  //       const hasComments = Array.from(mutation.addedNodes).some(node => 
+  //         node.querySelector && node.querySelector('.md[id$="-comment-rtjson-content"]')
+  //       );
+  //       if (hasComments) {
+  //         replaceTextWithResponse();
+  //       }
+  //     }
+  //   }
+  // });
 
   // Start observing the entire body for changes (including new comments being loaded)
-  observer.observe(document.body, { childList: true, subtree: true });
+  // observer.observe(document.body, { childList: true, subtree: true });
 
   // Initial scan of comments
   replaceTextWithResponse();
